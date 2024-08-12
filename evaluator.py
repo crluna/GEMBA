@@ -43,7 +43,6 @@ def compute_mqm_scores(
             method,
             model,
             list_mqm_errors=True,
-            add_scores=True,
         )
 
     return answers
@@ -53,5 +52,4 @@ if __name__ == "__main__":
     import sys
 
     res = compute_mqm_scores(sys.argv[1], sys.argv[2], explanations=True)
-    for r in res:
-        print(r)
+    print(res)
