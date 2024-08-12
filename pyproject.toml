@@ -25,7 +25,5 @@ dependencies = [
   "diskcache",
   "absl-py",
 ]
-[tool.setuptools]
-packages = ["gemba"]
 
 
