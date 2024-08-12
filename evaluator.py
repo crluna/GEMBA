@@ -15,10 +15,6 @@ def compute_mqm_scores(source,
     if not os.path.isfile(hypothesis):
         raise Exception(f"Source file {hypothesis} does not exist.")
 
-    assert len(source) == len(hypothesis), "Source and hypothesis files must have the same number of lines."
-
-    answers = get_gemba_scores(source, hypothesis, source_lang, target_lang, method, model)
-
     with open(source, 'r') as f:
         source = f.readlines()
     source = [x.strip() for x in source]
@@ -28,6 +24,13 @@ def compute_mqm_scores(source,
 
     hypothesis = [x.strip() for x in hypothesis]
 
+    assert len(source) == len(hypothesis), "Source and hypothesis files must have the same number of lines."
+
     answers = get_gemba_scores(source, hypothesis, source_lang, target_lang, method, model)
+
     return answers
 
+if __name__ == "__main__":
+    import sys
+    res = compute_mqm_scores(sys.argv[1], sys.argv[2])
+    print(res)
