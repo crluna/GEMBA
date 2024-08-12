@@ -9,7 +9,7 @@ def compute_mqm_scores(
     target_lang="Spanish",
     method="GEMBA-MQM",
     model="gpt-4o",
-    expnanations=False,
+    explanations=False,
 ):
     if not os.path.isfile(source):
         raise Exception(f"Source file {source} does not exist.")
@@ -30,13 +30,20 @@ def compute_mqm_scores(
         hypothesis
     ), "Source and hypothesis files must have the same number of lines."
 
-    if not expnanations:
+    if not explanations:
         answers = get_gemba_scores(
             source, hypothesis, source_lang, target_lang, method, model
         )
     else:
         answers = get_gemba_scores(
-            source, hypothesis, source_lang, target_lang, method, model
+            source,
+            hypothesis,
+            source_lang,
+            target_lang,
+            method,
+            model,
+            list_mqm_errors=True,
+            add_scores=True,
         )
 
     return answers
@@ -45,5 +52,6 @@ def compute_mqm_scores(
 if __name__ == "__main__":
     import sys
 
-    res = compute_mqm_scores(sys.argv[1], sys.argv[2])
-    print(res)
+    res = compute_mqm_scores(sys.argv[1], sys.argv[2], explanations=True)
+    for r in res:
+        print(r)
