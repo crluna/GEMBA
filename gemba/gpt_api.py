@@ -7,6 +7,7 @@ from termcolor import colored
 from datetime import datetime
 import openai
 import tqdm
+import httpx
 
 
 # class for calling OpenAI API and handling cache
@@ -24,10 +25,13 @@ class GptApi:
                 api_version="2023-07-01-preview"
             )
         elif "OPENAI_API_KEY" in os.environ:
+            http_client = httpx.Client(verify=False)
             # OpenAI API access
             self.client = openai.OpenAI(
-                api_key=os.environ["OPENAI_API_KEY"]
+                    http_client=http_client,
+                api_key=os.environ["OPENAI_API_KEY"],
             )
+
         else:
             raise Exception("OPENAI_API_KEY or OPENAI_AZURE_KEY not found in environment")
 
