@@ -10,6 +10,7 @@ description = "TODO"
 readme = "README.md"
 license = { text = "Proprietary" }
 authors = [{ name = "CRU group maintainers" }]
+
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: Other/Proprietary License",
@@ -22,8 +23,6 @@ dependencies = [
   "termcolor",
   "pexpect",
   "scipy",
-  "ipdb",
-  "diskcache"
+  "diskcache",
   "absl-py",
 ]
-
