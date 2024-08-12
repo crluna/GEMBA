@@ -36,13 +36,14 @@ def compute_mqm_scores(
         )
     else:
         answers = get_gemba_scores(
-            source,
-            hypothesis,
-            source_lang,
-            target_lang,
-            method,
-            model,
+            source=source,
+            hypothesis=hypothesis,
+            source_lang=source_lang,
+            target_lang=target_lang,
+            method=method,
+            model=model,
             list_mqm_errors=True,
+            add_scores=True,
         )
 
     return answers
@@ -52,4 +53,5 @@ if __name__ == "__main__":
     import sys
 
     res = compute_mqm_scores(sys.argv[1], sys.argv[2], explanations=True)
+
     print(res)
