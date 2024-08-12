@@ -15,3 +15,15 @@ classifiers = [
     "License :: Other/Proprietary License",
     "Operating System :: OS Independent",
 ]
+
+dependencies = [
+  "openai>=1.0.0",
+  "pandas",
+  "termcolor",
+  "pexpect",
+  "scipy",
+  "ipdb",
+  "diskcache"
+  "absl-py",
+]
+
