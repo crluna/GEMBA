@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cru_gemba"
+dynamic = ["version"]
+requires-python = ">=3.11.0"
+description = "TODO"
+readme = "README.md"
+license = { text = "Proprietary" }
+authors = [{ name = "CRU group maintainers" }]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: Other/Proprietary License",
+    "Operating System :: OS Independent",
+]
