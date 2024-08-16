@@ -7,26 +7,30 @@ from gemba.prompt import prompts, validate_number
 
 
 def get_gemba_scores(
-    source,
     hypothesis,
+    source,
     source_lang,
     target_lang,
     method,
     model,
     list_mqm_errors=False,
     add_scores=False,
+    use_cache=False,
 ):
     df = pd.DataFrame({"source_seg": source, "target_seg": hypothesis})
     df["source_lang"] = source_lang
     df["target_lang"] = target_lang
 
-    cache = dc.Cache(
-        f"cache/{model}_{method}",
-        expire=None,
-        size_limit=int(10e10),
-        cull_limit=0,
-        eviction_policy="none",
-    )
+    if use_cache:
+        cache = dc.Cache(
+            f"cache/{model}_{method}",
+            expire=None,
+            size_limit=int(10e10),
+            cull_limit=0,
+            eviction_policy="none",
+        )
+    else:
+        cache = dc.Cache()
     gptapi = GptApi()
 
     if method == "GEMBA-MQM":
@@ -40,6 +44,7 @@ def get_gemba_scores(
             )
 
         df["prompt"] = df.apply(lambda x: apply_template(TEMPLATE_GEMBA_MQM, x), axis=1)
+
         answers = gptapi.bulk_request(
             df, model, parse_answer, cache=cache, max_tokens=500
         )
